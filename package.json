@@ -1,0 +1,19 @@
+{
+  "name": "talent-match-terminal",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Application-style roster and AI-assisted shortlist platform for talent agencies.",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning platform.mjs",
+    "platform": "node --disable-warning=ExperimentalWarning platform.mjs",
+    "terminal": "node --disable-warning=ExperimentalWarning terminal.mjs",
+    "migrate": "node --disable-warning=ExperimentalWarning scripts/run-core.mjs migrate",
+    "seed": "node --disable-warning=ExperimentalWarning scripts/run-core.mjs seed",
+    "wikidata:roster": "node --disable-warning=ExperimentalWarning scripts/import-wikidata-roster.mjs 500",
+    "eval:match": "node --disable-warning=ExperimentalWarning scripts/evaluate-matching.mjs data/match-eval-sample.json 5"
+  }
+}

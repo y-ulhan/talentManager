@@ -1,0 +1,112 @@
+[
+  {
+    "id": "singer_campaign",
+    "brief": "Music brand campaign looking for a singer or vocalist with public profile. Build a First Draft shortlist.",
+    "relevance": [
+      { "talent_id": 197, "rating": 3 },
+      { "talent_id": 429, "rating": 3 },
+      { "talent_id": 161, "rating": 3 },
+      { "talent_id": 19, "rating": 2 },
+      { "talent_id": 335, "rating": 2 }
+    ]
+  },
+  {
+    "id": "model_fashion_campaign",
+    "brief": "Fashion campaign needs a model for a luxury editorial-style shoot.",
+    "relevance": [
+      { "talent_id": 175, "rating": 3 },
+      { "talent_id": 321, "rating": 3 },
+      { "talent_id": 111, "rating": 3 },
+      { "talent_id": 332, "rating": 2 },
+      { "talent_id": 180, "rating": 2 }
+    ]
+  },
+  {
+    "id": "comedian_host_campaign",
+    "brief": "Streaming launch needs a comedian with strong hosting or presenter energy.",
+    "relevance": [
+      { "talent_id": 373, "rating": 3 },
+      { "talent_id": 401, "rating": 3 },
+      { "talent_id": 245, "rating": 3 },
+      { "talent_id": 205, "rating": 2 },
+      { "talent_id": 471, "rating": 2 }
+    ]
+  },
+  {
+    "id": "presenter_campaign",
+    "brief": "Need a presenter or television presenter for a live interview campaign.",
+    "relevance": [
+      { "talent_id": 315, "rating": 3 },
+      { "talent_id": 187, "rating": 3 },
+      { "talent_id": 273, "rating": 3 },
+      { "talent_id": 123, "rating": 2 },
+      { "talent_id": 363, "rating": 2 }
+    ]
+  },
+  {
+    "id": "athlete_sports_campaign",
+    "brief": "Sports brand wants an athlete for a performance and fitness campaign.",
+    "relevance": [
+      { "talent_id": 380, "rating": 3 },
+      { "talent_id": 253, "rating": 3 },
+      { "talent_id": 317, "rating": 3 },
+      { "talent_id": 17, "rating": 2 },
+      { "talent_id": 97, "rating": 2 }
+    ]
+  },
+  {
+    "id": "rapper_music_campaign",
+    "brief": "Streetwear launch looking for a rapper or hip-hop musician with public figure visibility.",
+    "relevance": [
+      { "talent_id": 300, "rating": 3 },
+      { "talent_id": 336, "rating": 3 },
+      { "talent_id": 190, "rating": 3 },
+      { "talent_id": 204, "rating": 2 },
+      { "talent_id": 151, "rating": 2 }
+    ]
+  },
+  {
+    "id": "film_actor_campaign",
+    "brief": "Film studio campaign needs a film actor for a prestige release.",
+    "relevance": [
+      { "talent_id": 364, "rating": 3 },
+      { "talent_id": 432, "rating": 3 },
+      { "talent_id": 28, "rating": 3 },
+      { "talent_id": 37, "rating": 2 },
+      { "talent_id": 289, "rating": 2 }
+    ]
+  },
+  {
+    "id": "youtuber_digital_campaign",
+    "brief": "Digital-first brand campaign needs a YouTuber or online creator.",
+    "relevance": [
+      { "talent_id": 277, "rating": 3 },
+      { "talent_id": 476, "rating": 3 },
+      { "talent_id": 343, "rating": 3 },
+      { "talent_id": 116, "rating": 2 },
+      { "talent_id": 125, "rating": 2 }
+    ]
+  },
+  {
+    "id": "composer_music_campaign",
+    "brief": "Need a composer or songwriter for a music storytelling campaign.",
+    "relevance": [
+      { "talent_id": 301, "rating": 3 },
+      { "talent_id": 235, "rating": 3 },
+      { "talent_id": 229, "rating": 3 },
+      { "talent_id": 271, "rating": 2 },
+      { "talent_id": 22, "rating": 2 }
+    ]
+  },
+  {
+    "id": "television_actor_campaign",
+    "brief": "Network promo needs a television actor with public recognition.",
+    "relevance": [
+      { "talent_id": 118, "rating": 3 },
+      { "talent_id": 312, "rating": 3 },
+      { "talent_id": 134, "rating": 3 },
+      { "talent_id": 236, "rating": 2 },
+      { "talent_id": 250, "rating": 2 }
+    ]
+  }
+]
