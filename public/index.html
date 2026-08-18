@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Talent Match Terminal</title>
+    <meta name="description" content="Internal talent roster and client-match platform.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:wght@600;700;800;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css?v=workflow-20260812">
+  </head>
+  <body>
+    <div id="loginGate" class="login-gate">
+      <form id="loginForm" class="login-panel" autocomplete="on">
+        <p class="kicker">Talent Match Terminal</p>
+        <h1>Sign in to your roster.</h1>
+        <label>
+          Username
+          <input id="loginUsername" name="username" autocomplete="username" required>
+        </label>
+        <label>
+          Password
+          <input id="loginPassword" name="password" type="password" autocomplete="current-password" required>
+        </label>
+        <button type="submit">Sign in</button>
+        <p id="demoLogin" class="hint"></p>
+      </form>
+    </div>
+
+    <main id="appShell" class="app-shell" hidden>
+      <aside class="nav">
+        <div class="brand">
+          <span class="brand-mark">TM</span>
+          <div>
+            <strong>Talent Match</strong>
+            <span>internal platform</span>
+          </div>
+        </div>
+        <button class="nav-item active" data-screen="roster">Roster</button>
+        <button class="nav-item" data-screen="match">New Match</button>
+        <button class="nav-item" data-screen="history">History</button>
+        <button class="nav-item" data-screen="suggestions">Suggestions</button>
+        <button class="nav-item" data-screen="analytics">Analytics</button>
+        <button class="nav-item" data-screen="settings">Settings</button>
+        <div class="nav-footer">
+          <span id="userBadge">owner</span>
+          <button id="logoutButton" type="button">Log out</button>
+        </div>
+      </aside>
+
+      <section class="content">
+        <header class="content-header">
+          <div>
+            <p id="screenKicker" class="kicker">Roster</p>
+            <h2 id="screenTitle">This is your talent list.</h2>
+          </div>
+          <p id="screenFraming" class="framing">Add people one at a time, or upload the spreadsheet you already have.</p>
+        </header>
+
+        <section id="rosterScreen" class="screen active">
+          <div class="toolbar">
+            <label class="search">
+              Search or filter by tag
+              <input id="rosterSearch" placeholder="glasses, host, healthcare">
+            </label>
+            <button id="addTalentButton" type="button">Add talent</button>
+            <button id="uploadButton" type="button">Upload spreadsheet</button>
+            <label class="toggle small-toggle roster-archive-toggle">
+              <input id="showArchivedToggle" type="checkbox">
+              Archived
+            </label>
+          </div>
+          <div id="tagFilters" class="tag-filters"></div>
+          <div id="rosterGrid" class="roster-grid"></div>
+        </section>
+
+        <section id="matchScreen" class="screen">
+          <div class="match-layout">
+            <form id="matchForm" class="match-composer">
+              <div class="template-row">
+                <select id="templateSelect" aria-label="Saved inquiry templates">
+                  <option value="">Saved templates</option>
+                </select>
+                <button id="saveTemplateButton" class="secondary" type="button">Save template</button>
+                <button id="deleteTemplateButton" class="secondary" type="button">Delete</button>
+              </div>
+              <label>
+                Paste or type the campaign brief.
+                <textarea id="briefInput" rows="9" placeholder="Mental health awareness campaign, 20 talent, budget $400k, no British nationals, audience 35+."></textarea>
+              </label>
+              <div class="composer-actions">
+                <label class="toggle">
+                  <input id="webEnrichment" type="checkbox">
+                  Run Deep Research source checks when useful
+                </label>
+                <button type="submit">Build First Draft</button>
+              </div>
+            </form>
+            <div id="matchResults" class="match-results empty">
+              <h3>Campaign brief to verified shortlist.</h3>
+              <p>Paste the ask, then build a roster-prioritized First Draft with hard-filter notes, soft-rank evidence, backups, and a Deep Research review gate.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="historyScreen" class="screen">
+          <div class="history-layout">
+            <div id="historyList" class="history-list"></div>
+            <div id="historyDetail" class="history-detail">
+              <h3>Everything you've matched before.</h3>
+              <p>Select a past request to reopen the full result.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="suggestionsScreen" class="screen">
+          <div class="suggestions-head">
+            <p class="meta">Review import issues, suggested tags, match notes, and stale fields in one queue.</p>
+            <button id="refreshSuggestionsButton" type="button">Refresh</button>
+          </div>
+          <div id="suggestionsList" class="suggestions-list"></div>
+        </section>
+
+        <section id="analyticsScreen" class="screen">
+          <div id="analyticsPanel" class="analytics-panel"></div>
+        </section>
+
+        <section id="settingsScreen" class="screen">
+          <div class="settings-grid">
+            <div class="setting-block">
+              <h3>Login</h3>
+              <p id="settingsUser">Only the boss account is enabled in Phase 1.</p>
+            </div>
+            <div class="setting-block">
+              <h3>Roster backup</h3>
+              <p>Export the roster as CSV or download a safe SQLite snapshot before risky changes.</p>
+              <button id="settingsExportButton" type="button">Export roster CSV</button>
+              <button id="settingsBackupButton" class="secondary" type="button">Export database backup</button>
+            </div>
+            <div class="setting-block">
+              <h3>Duplicate scan</h3>
+              <p>Scan the roster for likely duplicate records and send anything suspicious to Suggestions.</p>
+              <button id="scanDuplicatesButton" class="secondary" type="button">Scan for duplicates</button>
+            </div>
+            <div class="setting-block">
+              <h3>Client sending</h3>
+              <p>V1 is copy-out only. The platform never emails a client directly.</p>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <dialog id="talentDialog">
+      <form id="talentForm" method="dialog" class="talent-form">
+        <header>
+          <h3 id="talentDialogTitle">Add talent</h3>
+          <button id="closeTalentDialog" type="button" aria-label="Close">x</button>
+        </header>
+        <input id="talentId" type="hidden">
+        <label>Name <input id="talentName" required></label>
+        <label>Tags / attributes <textarea id="talentTags" rows="3" placeholder="wears glasses, family member is an optometrist, past fitness campaigns"></textarea></label>
+        <div class="form-grid">
+          <label>Rate <input id="talentRate" placeholder="$5,000/day"></label>
+          <label>Availability <input id="talentAvailability" placeholder="Open next week"></label>
+        </div>
+        <div id="fieldProvenance" class="field-provenance"></div>
+        <section class="rate-history-box">
+          <h4>Rate history</h4>
+          <div id="talentRateHistory" class="rate-history-list"></div>
+        </section>
+        <section class="availability-box">
+          <div>
+            <h4>Holds & bookings</h4>
+            <p>Talent is available by default; add rows only for booked or held dates.</p>
+          </div>
+          <div id="talentAvailabilityWindows" class="availability-list"></div>
+          <div class="availability-form">
+            <select id="availabilityStatus" aria-label="Availability status">
+              <option value="held">Held</option>
+              <option value="booked">Booked</option>
+            </select>
+            <input id="availabilityStart" type="date" aria-label="Start date">
+            <input id="availabilityEnd" type="date" aria-label="End date">
+            <input id="availabilityNote" placeholder="note">
+            <button id="addAvailabilityButton" class="secondary" type="button">Add</button>
+          </div>
+        </section>
+        <section class="similar-box">
+          <h4>Similar talent</h4>
+          <div id="similarTalents" class="similar-list"></div>
+        </section>
+        <label>Notes <textarea id="talentNotes" rows="4"></textarea></label>
+        <label>Past bookings <textarea id="talentPast" rows="3"></textarea></label>
+        <section class="misc-notes-box">
+          <div>
+            <h4>Misc timeline</h4>
+            <p>Imported catch-all fields and saved match insights show up here with provenance.</p>
+          </div>
+          <div id="talentMiscNotes" class="misc-notes-list"></div>
+        </section>
+        <label>Photo <input id="talentPhoto" type="file" accept="image/png,image/jpeg,image/webp,image/gif"></label>
+        <label class="toggle small-toggle">
+          <input id="clearPhoto" type="checkbox">
+          Remove current photo
+        </label>
+        <section class="wikidata-box">
+          <div>
+            <h4>Public profile lookup</h4>
+            <p>Use Wikidata only for public figures already in your roster. Pick a result to attach it as a cited public source.</p>
+          </div>
+          <div class="wikidata-search-row">
+            <input id="wikidataQuery" placeholder="Search Wikidata by name">
+            <button id="wikidataSearchButton" type="button">Search Wikidata</button>
+          </div>
+          <div id="wikidataResults" class="wikidata-results"></div>
+          <div id="publicSources" class="public-sources"></div>
+        </section>
+        <footer>
+          <button id="restoreTalentButton" class="secondary" type="button" hidden>Restore</button>
+          <button id="deleteTalentButton" class="danger" type="button">Delete</button>
+          <button type="submit">Save talent</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <dialog id="importDialog" class="wide-dialog">
+      <section class="import-review">
+        <header>
+          <div>
+            <p class="kicker">Spreadsheet import</p>
+            <h3 id="importTitle">Review before saving</h3>
+          </div>
+          <button id="closeImportDialog" type="button" aria-label="Close">x</button>
+        </header>
+        <div id="importSummary" class="import-summary"></div>
+        <section class="import-panel">
+          <div class="panel-title">
+            <h4>Column mapping</h4>
+            <p class="meta">Confirm where each spreadsheet column should land before anything is saved.</p>
+          </div>
+          <div id="importMapping" class="import-mapping"></div>
+        </section>
+        <section class="import-panel">
+          <div class="panel-title">
+            <h4>Row review</h4>
+            <p class="meta">Conflicts and low-confidence rows stay out of the roster until reviewed.</p>
+          </div>
+          <div id="importRows" class="import-rows"></div>
+        </section>
+        <footer>
+          <button class="secondary" id="cancelImportButton" type="button">Cancel</button>
+          <button id="commitImportButton" type="button">Commit safe rows</button>
+        </footer>
+      </section>
+    </dialog>
+
+    <input id="spreadsheetInput" type="file" accept=".csv,.tsv,.xlsx,text/csv,text/tab-separated-values,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden>
+    <div id="toast" class="toast" aria-live="polite"></div>
+    <script src="/app.js?v=workflow-20260812" type="module"></script>
+  </body>
+</html>

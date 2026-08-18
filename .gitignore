@@ -1,0 +1,21 @@
+node_modules/
+
+# Local secrets and machine-specific config
+.env
+.env.*
+!.env.example
+
+# Runtime output
+uploads/
+backups/
+*.log
+npm-debug.log*
+
+# SQLite sidecar files from active connections
+data/*.db-shm
+data/*.db-wal
+data/*.sqlite
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
